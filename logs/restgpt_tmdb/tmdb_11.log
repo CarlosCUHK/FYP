@@ -1,0 +1,77 @@
+Query: Who is the director of Leonardo DiCaprio's latest movie?
+Planner: Search for the latest movie of Leonardo DiCaprio.
+API Selector: GET /search/person?query=Leonardo%20DiCaprio to get the id of Leonardo DiCaprio.
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+Caller: I need to make a GET request to the /search/person endpoint with the query parameter set to Leonardo DiCaprio.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/search/person",
+    "params": {
+        "query": "Leonardo DiCaprio"
+    },
+    "description": "The API response is a list of people matching the query.",
+    "output_instructions": "What is the id of Leonardo DiCaprio?"
+}
+Code: 
+id = [item['id'] for item in data['results'] if item['name'] == 'Leonardo DiCaprio'][0]
+print('The id of the person is {}'.format(id))
+Parser: The id of the person is 6193
+
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+Caller: Execution Result: Successfully call GET /search/person?query=Leonardo%20DiCaprio to get the id of Leonardo DiCaprio. The id of Leonardo DiCaprio is 6193.
+Objective: Please use the id of Leonardo DiCaprio to search for his latest movie and provide the director's name.
+Planner: Search for the latest movie of Leonardo DiCaprio (6193).
+API Selector: GET /person/6193/movie_credits to get the latest movie of Leonardo DiCaprio.
+Caller: I need to call GET /person/6193/movie_credits to get the latest movie of Leonardo DiCaprio.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/person/6193/movie_credits",
+    "description": "The API response is the movie credit list of Leonardo DiCaprio (id 6193)",
+    "output_instructions": "What is the name and id of the latest movie of this person?"
+}
+Code: 
+latest_movie = max(data['cast'], key=lambda movie: movie['release_date'])
+print('The name and id of the latest movie of this person is {title} ({id})'.format(title=latest_movie['title'], id=latest_movie['id']))
+Parser: The name and id of the latest movie of this person is Old Dads (987917)
+
+Caller: Execution Result: Successfully call GET /person/6193/movie_credits to get the latest movie of Leonardo DiCaprio. The name and id of the latest movie of this person is Old Dads (987917).
+Objective: Please use the id of the movie (987917) to search for the director's name.
+Planner: Search for the director of Old Dads (987917).
+API Selector: GET /movie/987917/credits to get the director of the movie Old Dads (987917).
+Caller: I need to call GET /movie/{movie_id}/credits to get the director of the movie Old Dads (987917).
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/movie/987917/credits",
+    "description": "The API response is the cast and crew for the movie Old Dads (987917)."
+    "output_instructions": "What is the name and id of the director of this movie?"
+}
+Code: 
+
+director_name = None
+director_id = None
+
+for item in data['crew']:
+    if item['job'] == 'Director':
+        director_name = item['name']
+        director_id = item['id']
+        break
+
+print('The name and id of the director of this movie is {}, {}'.format(director_name, director_id))
+Parser: The name and id of the director of this movie is Bill Burr, 109708
+
+Caller: Execution Result: Successfully call GET /movie/987917/credits to get the director of the movie Old Dads (987917). The name and id of the director of this movie is Bill Burr, 109708.
+Final Answer: The director of Leonardo DiCaprio's latest movie is Bill Burr (109708).
+Execution Time: 188 seconds

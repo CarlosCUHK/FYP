@@ -1,0 +1,47 @@
+Query: Who directed the top-1 rated movie?
+Planner: Search for the top-1 rated movie.
+API Selector: GET /movie/top_rated Get the top rated movies on TMDb.
+Caller: I need to make a GET request to the /movie/top_rated endpoint to get the top rated movies on TMDb.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/movie/top_rated",
+    "params": {
+        "page": "1",
+        "region": ""
+    },
+    "description": "Get the top rated movies on TMDb.",
+    "output_instructions": "What are the names and ids of the top rated movies?"
+}
+
+Code: 
+
+# Get the list of movies
+movies = data['results']
+
+# Get the names and ids of the top rated movies
+movie_names_ids = [(movie['title'], movie['id']) for movie in movies]
+
+# Print the result
+print("The names and ids of the top rated movies are {}".format(movie_names_ids))
+Parser: The names and ids of the top rated movies are [('The Godfather', 238), ('The Shawshank Redemption', 278), ('The Godfather Part II', 240), ("Schindler's List", 424), ('Dilwale Dulhania Le Jayenge', 19404), ('12 Angry Men', 389), ('Spirited Away', 129), ('Parasite', 496243), ('The Dark Knight', 155), ('Your Name.', 372058), ('The Green Mile', 497), ('Pulp Fiction', 680), ('Forrest Gump', 13), ('The Lord of the Rings: The Return of the King', 122), ('The Good, the Bad and the Ugly', 429), ('GoodFellas', 769), ('Life Is Beautiful', 637), ('Grave of the Fireflies', 12477), ('Seven Samurai', 346), ('Cinema Paradiso', 11216)]
+
+Caller: Execution Result: Successfully call GET /movie/top_rated to get the top rated movies on TMDb. The names and ids of the top rated movies are The Godfather (id 238), The Shawshank Redemption (id 278), The Godfather Part II (id 240), Schindler's List (id 424), Dilwale Dulhania Le Jayenge (id 19404), 12 Angry Men (id 389), Spirited Away (id 129), Parasite (id 496243), The Dark Knight (id 155), Your Name. (id 372058), The Green Mile (id 497), Pulp Fiction (id 680), Forrest Gump (id 13), The Lord of the Rings: The Return of the King (id 122), The Good, the Bad and the Ugly (id 429), GoodFellas (id 769), Life Is Beautiful (id 637), Grave of the Fireflies (id 12477), Seven Samurai (id 346), Cinema Paradiso (id 11216).
+Objective: Please provide the director of the top-1 rated movie.
+Planner: Get the director of the top-1 rated movie (The Godfather, id 238).
+API Selector: GET /movie/238/credits to get the director of the movie The Godfather (id 238)
+Caller: I need to call the GET /movie/{movie_id}/credits endpoint with the movie id of The Godfather (id 238).
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/movie/238/credits",
+    "description": "The API response is the cast and crew for the movie The Godfather (id 238).",
+    "output_instructions": "What is the name of the director of this movie?"
+}
+Code: 
+print('The name of the director of this movie is {}'.format(next(item['name'] for item in data['crew'] if item['job'] == 'Director')))
+Parser: The name of the director of this movie is Francis Ford Coppola
+
+Caller: Execution Result: Successfully call GET /movie/238/credits to get the director of the movie The Godfather (id 238). The name of the director of this movie is Francis Ford Coppola.
+Final Answer: The director of the top-1 rated movie is Francis Ford Coppola.
+Execution Time: 106 seconds

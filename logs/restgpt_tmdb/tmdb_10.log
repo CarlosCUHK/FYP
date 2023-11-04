@@ -1,0 +1,23 @@
+Query: tell me the highest rated movie directed by Martin Scorsese
+Planner: Search for the highest rated movie directed by Martin Scorsese.
+API Selector: GET /search/person?query=Martin%20Scorsese to get the id of Martin Scorsese.
+Caller: I need to make a GET request to the /search/person endpoint with the query parameter set to "Martin Scorsese".
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/search/person",
+    "params": {
+        "query": "Martin Scorsese"
+    },
+    "description": "The API response is a list of people matching the query.",
+    "output_instructions": "What is the id of Martin Scorsese?"
+}
+Code: 
+id = [item['id'] for item in data['results'] if item['name'] == 'Martin Scorsese'][0]
+print('The id of the person is {}'.format(id))
+Parser: The id of the person is 1032
+
+Caller: Execution Result: Successfully call GET /search/person?query=Martin%20Scorsese to search for the director "Martin Scorsese". The id of Martin Scorsese is 1032.
+Objective: Please give the highest rated movie directed by Martin Scorsese.
+Planner: Continue. Search for the highest rated movie directed by Martin Scorsese (1032).
+API Selector: GET /person/1032/movie_credits to get the movie credits for Martin Scorsese (1032).

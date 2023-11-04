@@ -1,0 +1,44 @@
+Query: give me a photo belong to the second episode of the first season of the Witcher
+Planner: Search for the second episode of the first season of the Witcher.
+API Selector: GET /search/tv?query=The Witcher
+To search for the TV show "The Witcher"
+Caller: I need to make a GET request to the /search/tv endpoint with the query parameter set to "The Witcher".
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/search/tv",
+    "params": {
+        "query": "The Witcher"
+    },
+    "description": "The API response is a list of TV shows matching the query.",
+    "output_instructions": "What is the id of the TV show 'The Witcher'?"
+}
+Code: 
+print('The id of the TV show The Witcher is {}'.format(next(item['id'] for item in data['results'] if item['name'] == 'The Witcher')))
+Parser: The id of the TV show The Witcher is 71912
+
+Caller: Execution Result: Successfully call GET /search/tv?query=The Witcher to search for the TV show "The Witcher". The id of the TV show The Witcher is 71912.
+Objective: Please give me a photo belong to the second episode of the first season of the Witcher.
+Planner: Search for the photos of the second episode of the first season of the Witcher (71912).
+API Selector: GET /tv/71912/season/1/episode/2/images
+
+Purpose: Get the images that belong to the second episode of the first season of the TV show "The Witcher" (71912).
+Caller: I need to make a GET request to the API endpoint with the TV show id and season and episode numbers.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/tv/71912/season/1/episode/2/images",
+    "description": "Get the images that belong to the second episode of the first season of the TV show The Witcher (71912).",
+    "output_instructions": "What are the ids and names of the images returned by the API?"
+}
+
+Code: 
+ids_and_names = []
+for item in data['stills']:
+    ids_and_names.append((item['file_path'], item['iso_639_1']))
+print('The ids and names of the images returned by the API are {}'.format(ids_and_names))
+Parser: The ids and names of the images returned by the API are [('/7KWyZgiSXSAuagbtzjTZLrkOtNk.jpg', None), ('/iUJLQHMchPebXb3UoS9EOGh8Zag.jpg', None)]
+
+Caller: Execution Result: Successfully call GET /tv/71912/season/1/episode/2/images to get the images that belong to the second episode of the first season of the TV show The Witcher (71912). The ids and names of the images returned by the API are '/7KWyZgiSXSAuagbtzjTZLrkOtNk.jpg' and '/iUJLQHMchPebXb3UoS9EOGh8Zag.jpg'.
+Final Answer: The ids and names of the images returned by the API are '/7KWyZgiSXSAuagbtzjTZLrkOtNk.jpg' and '/iUJLQHMchPebXb3UoS9EOGh8Zag.jpg'.
+Execution Time: 91 seconds

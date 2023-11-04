@@ -1,0 +1,22 @@
+Query: Who is the most popular person?
+Planner: Search for the most popular person.
+API Selector: GET /person/popular to get the most popular person.
+Caller: I need to make a GET request to the /person/popular endpoint to get the most popular person.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/person/popular",
+    "params": {
+        "page": "1"
+    },
+    "description": "Get the list of popular people on TMDb.",
+    "output_instructions": "What is the name and id of the most popular person?"
+}
+Code: 
+name, id = data['results'][0]['name'], data['results'][0]['id']
+print('The name and id of the most popular person is {0} and {1}'.format(name, id))
+Parser: The name and id of the most popular person is Piper Rubio and 2283930
+
+Caller: Execution Result: Successfully call GET /person/popular to get the list of popular people on TMDb. The most popular person is Piper Rubio with id 2283930.
+Final Answer: Piper Rubio with id 2283930 is the most popular person on TMDb.
+Execution Time: 15 seconds

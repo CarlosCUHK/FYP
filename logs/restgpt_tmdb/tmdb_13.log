@@ -1,0 +1,42 @@
+Query: Please recommend me some TV shows similar to Breaking Bad
+Planner: Search for TV shows similar to Breaking Bad.
+API Selector: GET /tv/{tv_id}/similar to get TV shows similar to Breaking Bad.
+Caller: I need to find the tv_id of Breaking Bad first.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/search/tv",
+    "params": {
+        "query": "Breaking Bad"
+    },
+    "description": "The API response is a list of TV shows that match the query 'Breaking Bad'.",
+    "output_instructions": "What is the id of the TV show 'Breaking Bad'?"
+}
+
+Code: 
+print('The id of the TV show Breaking Bad is {}'.format(next(item['id'] for item in data['results'] if item['name'] == 'Breaking Bad')))
+Parser: The id of the TV show Breaking Bad is 1396
+
+Caller: Thought: I have the tv_id of Breaking Bad, now I can call the API to get similar TV shows.
+
+Operation: GET
+Input: {
+    "url": "https://api.themoviedb.org/3/tv/1396/similar",
+    "description": "The API response is a list of similar TV shows to 'Breaking Bad'.",
+    "output_instructions": "What are the names and ids of the similar TV shows?"
+}
+
+Code: 
+similar_tv_shows = [{'name': show['name'], 'id': show['id']} for show in data['results']]
+print('The names and ids of the similar TV shows are {}'.format(similar_tv_shows))
+Parser: The names and ids of the similar TV shows are [{'name': 'Oka Tokat', 'id': 44625}, {'name': "This Is England '90", 'id': 44641}, {'name': 'Hitsuji no Uta', 'id': 44971}, {'name': 'SCAMS', 'id': 94830}, {'name': 'White Spring', 'id': 45975}, {'name': 'Katanagatari', 'id': 46374}, {'name': 'Mirage', 'id': 70472}, {'name': 'Brotherhood', 'id': 2204}, {'name': 'Lewis', 'id': 2343}, {'name': 'Destiny of the Shrine Maiden', 'id': 46423}, {'name': 'The Wright Verdicts', 'id': 24589}, {'name': 'The Club', 'id': 95467}, {'name': 'Who Killed Sara?', 'id': 120168}, {'name': 'Love of My Life', 'id': 219100}, {'name': 'Weeds', 'id': 186}, {'name': 'Goblin', 'id': 67915}, {'name': 'Yosuga no Sora', 'id': 68005}, {'name': 'Who Died?', 'id': 117785}, {'name': 'The Hours of My Life', 'id': 68183}, {'name': 'Temple', 'id': 93177}]
+
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+error_code=rate_limit_exceeded error_message='Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.' error_param=None error_type=requests message='OpenAI API error received' stream_error=False
+Retrying langchain.llms.openai.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised RateLimitError: Rate limit reached for text-davinci-003 in organization org-mljX4U1ugiOZoLj18QUv4JtM on requests per min. Limit: 3 / min. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing..
+Caller: Execution Result: Successfully call GET /tv/{tv_id}/similar to get TV shows similar to Breaking Bad. The names and ids of the similar TV shows are Oka Tokat (id 44625), This Is England '90 (id 44641), Hitsuji no Uta (id 44971), SCAMS (id 94830), White Spring (id 45975), Katanagatari (id 46374), Mirage (id 70472), Brotherhood (id 2204), Lewis (id 2343), Destiny of the Shrine Maiden (id 46423), The Wright Verdicts (id 24589), The Club (id 95467), Who Killed Sara? (id 120168), Love of My Life (id 219100), Weeds (id 186), Goblin (id 67915), Yosuga no Sora (id 68005), Who Died? (id 117785), The Hours of My Life (id 68183), and Temple (id 93177).
+Final Answer: Here are the names and ids of the TV shows similar to Breaking Bad: Oka Tokat (id 44625), This Is England '90 (id 44641), Hitsuji no Uta (id 44971), SCAMS (id 94830), White Spring (id 45975), Katanagatari (id 46374), Mirage (id 70472), Brotherhood (id 2204), Lewis (id 2343), Destiny of the Shrine Maiden (id 46423), The Wright Verdicts (id 24589), The Club (id 95467), Who Killed Sara? (id 120168), Love of My Life (id 219100), Weeds (id 186), Goblin (id 67915), Yosuga no Sora (id 68005), Who Died? (id 117785), The Hours of My Life (id 68183), and Temple (id 93177).
+Execution Time: 40 seconds
