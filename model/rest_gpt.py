@@ -68,12 +68,12 @@ class RestGPT(Chain):
             scenario = 'spotify' 
         if scenario not in ['tmdb', 'spotify']:
             raise ValueError(f"Invalid scenario {scenario}")
-        teamleader_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+        teamleader_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
         team_leader = TeamLeader(llm=teamleader_llm, scenario=scenario)
 
-        planner_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+        planner_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
         planner = Planner(llm=planner_llm, scenario=scenario)
-        api_selector_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+        api_selector_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
         api_selector = APISelector(llm=api_selector_llm, scenario=scenario, api_spec=api_spec)
 
         super().__init__(
@@ -154,7 +154,7 @@ class RestGPT(Chain):
             input_variables=["question", "answer"],
         )
 
-        formulate_answer_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+        formulate_answer_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
         formulate_answer_chain = LLMChain(llm=formulate_answer_llm, prompt=formulate_answer_prompt)
         leader_response = self.team_leader.run(history=global_history)
         if "Question:" in leader_response:
@@ -207,7 +207,7 @@ class RestGPT(Chain):
                 global_history.append("API Selector: " + api_plan)
 
             finished = re.match(r"No API call needed.(.*)", api_plan)
-            caller_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+            caller_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
             if not finished:
                 executor = Caller(llm=caller_llm, api_spec=self.api_spec, scenario=self.scenario, simple_parser=self.simple_parser, requests_wrapper=self.requests_wrapper)
                 execution_res = executor.run(api_plan=api_plan, background=api_selector_background, leader="")
@@ -253,7 +253,7 @@ class RestGPT(Chain):
                     global_history.append("API Selector: " + api_plan)
                 finished = re.match(r"No API call needed.(.*)", api_plan)
 
-                caller_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
+                caller_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=700)
                 if not finished:
                     executor = Caller(llm=caller_llm, api_spec=self.api_spec, scenario=self.scenario, simple_parser=self.simple_parser, requests_wrapper=self.requests_wrapper)
                     execution_res = executor.run(api_plan=api_plan, background=api_selector_background, leader="")
