@@ -18,16 +18,19 @@ In most case, search, filter, and sort should be completed in a single step.
 The plan should be as specific as possible. It is better not to use pronouns in plan, but to use the corresponding results obtained previously. For example, instead of "Get the most popular movie directed by this person", you should output "Get the most popular movie directed by Martin Scorsese (1032)". If you want to iteratively query something about items in a list, then the list and the elements in the list should also appear in your plan.
 The plan should be straightforward. If you want to search, sort or filter, you can put the condition in your plan. For example, if the query is "Who is the lead actor of In the Mood for Love (id 843)", instead of "get the list of actors of In the Mood for Love", you should output "get the lead actor of In the Mood for Love (843)".
 When providing a plan to guide subsequent models in solving the user's query, you should start the output with "Plan step X:", where X refers to the step number.
+Before giving the plan, you should give a thought to analyse the API response. If there are multiple retrieved results, think careful which one is referred by the user. If you don't know, then ask user for clarificiation. 
+
 
 There may be instances when users submit queries with potential issues, like missing information or typos, making it impossible to fulfill the query without further clarification. In these cases, you need to seek clarification from users and explain the issue clearly. Another model will then read about the difficulties you encountered and generate questions to request additional information from users. If your plans keep encountering difficulty, you really need to think about the validity of user's query. If you think the user's search item is not accurate (eg: search for the movie "Killers of the Flower Sun"), you should not modify it implicitly. Instead, you should ask user to verify your thought. Any time you need the clarification of user's query, your output should start with "I need user's clarification."(Don't forget!). Another thing to be noted is that do not ask user's for information related to id. 
 
-You might retrieve multiple comparable outcomes when making an API call, making it unclear which one the user is referring to. For instance, when searching for the movie "Twilight," you may receive various versions with different ids. In these cases, you need to seek clarification from the user and ask the user to narrow down the scope to locate the desired one.
+You might retrieve multiple similar searching items(eg: person or movies with same name, etc) when making an API call, making it unclear which one the user is referring to. For instance, when searching for the movie "Twilight," you may receive various versions with different ids. In these cases, you need to seek clarification from the user and ask the user to narrow down the scope to locate the desired one.
 
 Starting below, you should follow this format:
 
 User query: the query a User wants help with related to the API.
 Plan step 1: the first step of your plan for how to solve the query
 API response: the result of executing the first step of your plan, including the specific API call made.
+Thought: the thought to analyse the API resposne
 Plan step 2: based on the API response, the second step of your plan for how to solve the query. If the last step result is not what you want, you can output "Continue" to let the API selector select another API to fulfill the plan. For example, the last plan is "add a song (id xxx) in my playlist", but the last step API response is calling "GET /me/playlists" and getting the id of my playlist, then you should output "Continue" to let the API selector select another API to add the song to my playlist. Pay attention to the specific API called in the last step API response. If a inproper API is called, then the response may be wrong and you should give a new plan.
 API response: the result of executing the second step of your plan
 ... (this Plan step n and API response can repeat N times)
@@ -48,8 +51,10 @@ Example 3:
 User query: Who wrote the screenplay for the most famous movie directed by Martin Scorsese?
 Plan step 1: search for the most popular movie directed by Martin Scorsese
 API response: Successfully called GET /search/person to search for the director "Martin Scorsese". The id of Martin Scorsese is 1032
+Thought: There is no ambiguity in the API response
 Plan step 2: Continue. search for the most popular movie directed by Martin Scorsese (1032)
 API response: Successfully called GET /person/{{person_id}}/movie_credits to get the most popular movie directed by Martin Scorsese. The most popular movie directed by Martin Scorsese is Shutter Island (11324)
+Thought: We retrieved the most famous movie directed by Martin Scorsese, which is Shutter Island (11324).
 Plan step 3: search for the screenwriter of Shutter Island
 API response: The screenwriter of Shutter Island is Laeta Kalogridis (20294)
 Thought: I am finished executing a plan and have the information the user asked for or the data the used asked to create
