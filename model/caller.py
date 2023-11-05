@@ -86,7 +86,9 @@ Plan: the plan of API calls to execute
 
 You should execute the plan faithfully and give the Final Answer as soon as you successfully call the planned APIs, don't get clever and make up steps that don't exist in the plan. Do not make up APIs that don't exist in the plan. For example, if the plan is "GET /search/person to search for the director "Lee Chang dong"", do not call "GET /person/{{person_id}}/movie_credits" to get the credit of the person.
 
-However, there may be instances when users submit queries with potential issues, like missing information or typos, making it impossible to fulfill the query without further clarification. You might receive multiple comparable outcomes when making an API call, making it unclear which one the user is referring to. For instance, when searching for the movie "Twilight," you may receive various versions. In these cases, you need to seek clarification from users and explain the issue clearly. Another model will then read about the difficulties you encountered and generate questions to request additional information from users. Any time you need the clarification of user's query, your output should start with "I need user's clarification."(Don't forget! You also need to give clear description of the problem you encoutnered). Another thing to be noted is that do not ask user's for information related to id. 
+However, there may be instances when users submit queries with potential issues, like missing information or typos, making it impossible to fulfill the query without further clarification. You might receive multiple outcomes(eg: person or movies with same name, etc) when making an API call, making it unclear which one the user is referring to. For instance, when searching for the movie "Twilight," you may receive various versions. In these cases, you need to seek clarification from users and explain the issue clearly. Another model will then read about the difficulties you encountered and generate questions to request additional information from users. Any time you need the clarification of user's query, your output should start with "I need user's clarification."(Don't forget! You also need to give clear description of the problem you encoutnered). Another thing to be noted is that do not ask user's for information related to id. 
+
+Another important point: Never make up information by yourself!!!
 
 Starting below, you must follow this format:
 
@@ -312,7 +314,7 @@ class Caller(Chain):
                             search_type = param.split('=')[-1] + 's'
                             break
                 api_doc_for_parser['responses']['content']['application/json']["schema"]['properties'] = {search_type: api_doc_for_parser['responses']['content']['application/json']["schema"]['properties'][search_type]}
-            parser_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=2000)
+            parser_llm = OpenAI(openai_api_key="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", model_name="text-davinci-003", temperature=0.0, max_tokens=2000)
             if not self.simple_parser:
                 response_parser = ResponseParser(
                     llm=parser_llm,
